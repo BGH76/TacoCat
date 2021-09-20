@@ -35,7 +35,7 @@
                     <a class="nav-link" href="app.html">The App</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page href="code.html">The Code</a>
+                    <a class="nav-link active" aria-current="page" href="code.html">The Code</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" target="_blank" href="#">Git Repo</a>
@@ -56,17 +56,47 @@
                 <pre class="line-number">
                     <code class="language-javascript">
                         <!-- === Code goes here === -->
-                        // Call Hello World
-                        function HelloWorld(){
-                        alert("Hello World");
-                        }
+                        document.getElementById("btnCheck").addEventListener("click", runTest);
+let alertBox = document.getElementById("alert").classList;
+let msg = document.getElementById("msg");
+let alertHeading = document.getElementById("alertHeading");
+
+function runTest(){
+    let phrase = document.getElementById("userPhrase").value;
+
+    // Get phrase in lowercase with spaces and special characters removed
+    phrase = phrase.toLowerCase();
+    let regrex = /[^a-z0-9]/gi;
+    phrase = phrase.replace(regrex, "");
+
+    // Reverse phrase and store in variable temp
+    let temp = "";
+    for(let i = phrase.length-1; i >= 0; i--){
+        temp += phrase[i];
+    }
+
+    // Compare characters of phrase and reversed phrase
+    for(let j = 0; j < phrase.length; j++){
+        if(phrase[j] != temp[j]){
+            alertBox.remove("alert-success");
+            alertBox.add("alert-danger");
+            alertHeading.innerHTML = "Sorry! Your phrase is not a palindrome";
+            msg.innerHTML = `${phrase} is not a palindrome`;
+            alertBox.remove("invisible");
+            return;
+        }    
+    }
+
+    msg.innerHTML = `Your phrase ${phrase} is a palindrome.`;
+    alertBox.remove("invisible");
+    alertHeading.innerHTML = "Terrific! Your phrase is a <strong>Palindrome</strong>"; 
+}
                     </code>
                 </pre>
             </div>
             <div class="col-lg-4">
-                <p>The Code is structed in one function.</p>
-                <h5>Hello World</h5>
-                <p>Hello World is a fucntion that displays an alert with a message of "Hello World"</p>
+                <h5>TacoCat</h5>
+                <p>Code to compare user phrase.</p>
             </div>
         </div>
      </div>
